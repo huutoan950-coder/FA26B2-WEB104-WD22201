@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Demo 4</h1>
+    <div class="card">
+      <h2>Thao tac co ban voi mang</h2>
+      <pre id="out-1"></pre>
+    </div>
+    <div class="card">
+      <h2>Sap xep mang san pham</h2>
+      <pre id="out-2"></pre>
+    </div>
+    <script>
+      function print(id, lines) {
+        document.getElementById(id).textContent = lines.join("\n");
+      }
+      // lam bai 1
+      let danhSachBai1 = ["Trung", "Thit", "Rau"]; // tao mang
+      const b1_soLuongBanDau = danhSachBai1.length; // so luong ban dau
+      danhSachBai1.push("Sua"); // them vao cuoi mang
+      danhSachBai1.unshift("Banh my"); // them vao dau mang
+      const removedItem = danhSachBai1.pop(); // xoa cuoi
+      const secondItem = danhSachBai1[1]; // phan tu thu 2
+      // thuc hien in
+      print("out-1", [
+        `a) so luong ban dau: ${b1_soLuongBanDau}`,
+        `b) mat hang bi xoa o cuoi: ${removedItem}`,
+        `c) mat hang thu hai hien tai: ${secondItem}`,
+        `d) mang sau thay doi: ${JSON.stringify(danhSachBai1)}`,
+      ]);
+      // ....................demo bai 2
+      const products = [
+        { name: "Laptop", price: 1200 },
+        { name: "Mouse", price: 300 },
+        { name: "Keyboard", price: 500 },
+        { name: "Monitor", price: 800 },
+      ];
+      const danhSachSauSapXep = [...products].sort((a, b) => a.price - b.price); // sap xep gia tang dan
+      print("out-2", [
+        "mang san pham sau khi sap xep gia tang dan: ",
+        JSON.stringify(danhSachSauSapXep, null, 2),
+      ]);
+      // ...............demo 3 --- tinh tong tien gio hang
+      const gioHang = [
+        { title: "Ao", price: 150, qty: 2, inStock: true },
+        { title: "Quan", price: 132, qty: 1, inStock: false },
+        { title: "Giay", price: 222, qty: 1, inStock: true },
+      ];
+      // tinh tong tien
+      const tongTien = gioHang
+        .filter((item) => item.inStock)
+        .reduce((sum, item) => sum + item.price * item.qty, 0);
+      console.log("Tong tien hang co san: ", tongTien);
+    </script>
+  </body>
+</html>

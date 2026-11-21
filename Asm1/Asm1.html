@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PulsePods Air - Tai nghe chống ồn không dây</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Arial, sans-serif;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        background: #fdf4ff;
+        color: #1e1b4b;
+      }
+
+      header {
+        position: sticky;
+        top: 12px;
+        z-index: 100;
+        max-width: 1160px;
+        margin: 12px auto;
+        padding: 14px 28px;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(10px);
+        border: 1px solid #f0abfc;
+        border-radius: 999px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 10px 25px rgba(168, 85, 247, 0.14);
+      }
+
+      .logo {
+        font-size: 22px;
+        font-weight: 800;
+        background: linear-gradient(90deg, #7c3aed, #ec4899, #06b6d4);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: #312e81;
+        font-weight: 600;
+        font-size: 15px;
+        transition: 0.25s;
+      }
+
+      nav a:hover {
+        color: #db2777;
+      }
+
+      nav a.nav-cta {
+        background: linear-gradient(135deg, #7c3aed, #ec4899);
+        color: #ffffff;
+        padding: 9px 18px;
+        border-radius: 999px;
+      }
+
+      nav a.nav-cta:hover {
+        color: #ffffff;
+        opacity: 0.92;
+      }
+
+      .menu-btn {
+        display: none;
+        font-size: 24px;
+        color: #7c3aed;
+      }
+
+      .hero {
+        max-width: 1160px;
+        margin: 24px auto 0;
+        padding: 56px 44px;
+        border-radius: 32px;
+        background: linear-gradient(
+          135deg,
+          #4f46e5 0%,
+          #9333ea 52%,
+          #ec4899 100%
+        );
+        color: #ffffff;
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        gap: 44px;
+        box-shadow: 0 22px 45px rgba(124, 58, 237, 0.25);
+      }
+
+      .hero-content {
+        flex: 1.15;
+      }
+
+      .badge {
+        display: inline-block;
+        background: rgba(255, 255, 255, 0.2);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        padding: 6px 14px;
+        border-radius: 999px;
+        font-size: 13px;
+        font-weight: 700;
+        margin-bottom: 18px;
+        letter-spacing: 0.4px;
+      }
+
+      .hero-content h1 {
+        font-size: 44px;
+        line-height: 1.18;
+        margin-bottom: 18px;
+      }
+
+      .hero-content h1 span {
+        color: #fde047;
+      }
+
+      .hero-content p {
+        font-size: 17px;
+        line-height: 1.7;
+        color: #f5d0fe;
+        margin-bottom: 28px;
+      }
+
+      .hero-visual {
+        flex: 0.85;
+        display: flex;
+        justify-content: center;
+      }
+
+      .hero-visual img {
+        width: 100%;
+        max-width: 380px;
+        height: 360px;
+        object-fit: cover;
+        border-radius: 26px;
+        border: 4px solid rgba(255, 255, 255, 0.45);
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.35);
+      }
+
+      .btn {
+        display: inline-block;
+        background: #fde047;
+        color: #1e1b4b;
+        padding: 14px 28px;
+        border-radius: 12px;
+        text-decoration: none;
+        font-weight: 800;
+        border: none;
+        cursor: pointer;
+        transition: 0.25s;
+      }
+
+      .btn:hover {
+        background: #facc15;
+        transform: translateY(-2px);
+      }
+
+      section {
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 72px 20px;
+      }
+
+      .section-title {
+        text-align: center;
+        margin-bottom: 44px;
+      }
+
+      .section-title h2 {
+        font-size: 34px;
+        color: #312e81;
+        margin-bottom: 10px;
+      }
+
+      .section-title p {
+        color: #6b21a8;
+        font-size: 16px;
+      }
+
+      /* TÍNH NĂNG: VIỀN MÀU & NỀN DỊU */
+      .features {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .feature-card {
+        background: #ffffff;
+        padding: 30px 24px;
+        border-radius: 22px;
+        border-top: 5px solid #8b5cf6;
+        box-shadow: 0 10px 25px rgba(139, 92, 246, 0.1);
+        transition: 0.25s;
+      }
+
+      .feature-card:nth-child(2) {
+        border-top-color: #ec4899;
+      }
+
+      .feature-card:nth-child(3) {
+        border-top-color: #06b6d4;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-6px);
+      }
+
+      .feature-card .icon {
+        width: 56px;
+        height: 56px;
+        border-radius: 16px;
+        background: #fae8ff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin-bottom: 16px;
+      }
+
+      .feature-card:nth-child(2) .icon {
+        background: #fce7f3;
+      }
+
+      .feature-card:nth-child(3) .icon {
+        background: #cffafe;
+      }
+
+      .feature-card h3 {
+        font-size: 20px;
+        margin-bottom: 10px;
+        color: #1e1b4b;
+      }
+
+      .feature-card p {
+        color: #4b5563;
+        line-height: 1.65;
+      }
+
+      .product-box {
+        background: linear-gradient(120deg, #ffffff, #fae8ff);
+        border: 2px solid #e879f9;
+        border-radius: 28px;
+        padding: 40px;
+        display: flex;
+        align-items: center;
+        gap: 44px;
+        box-shadow: 0 14px 32px rgba(217, 70, 239, 0.12);
+      }
+
+      .product-box img {
+        width: 380px;
+        max-width: 100%;
+        height: 320px;
+        object-fit: cover;
+        border-radius: 22px;
+      }
+
+      .product-info {
+        flex: 1;
+      }
+
+      .product-info h2 {
+        font-size: 32px;
+        color: #4c1d95;
+        margin-bottom: 14px;
+      }
+
+      .product-info p {
+        color: #374151;
+        line-height: 1.7;
+      }
+
+      .price-wrap {
+        margin: 20px 0 14px;
+        display: flex;
+        align-items: baseline;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+
+      .price {
+        font-size: 32px;
+        font-weight: 800;
+        color: #db2777;
+      }
+
+      .old-price {
+        font-size: 18px;
+        color: #9ca3af;
+        text-decoration: line-through;
+      }
+
+      .promo-tag {
+        display: inline-block;
+        background: #dcfce7;
+        color: #166534;
+        font-weight: 700;
+        padding: 8px 14px;
+        border-radius: 10px;
+        margin-bottom: 22px;
+        font-size: 14px;
+      }
+
+      .btn-purple {
+        background: linear-gradient(135deg, #7c3aed, #ec4899);
+        color: #ffffff;
+      }
+
+      .btn-purple:hover {
+        background: linear-gradient(135deg, #6d28d9, #db2777);
+      }
+
+      /* ĐÁNH GIÁ: THẺ QUOTE NỀN SÁNG ĐA SẮC */
+      .testimonials {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+
+      .review {
+        background: #ffffff;
+        padding: 26px;
+        border-radius: 20px;
+        border: 1px solid #f3e8ff;
+        box-shadow: 0 8px 20px rgba(79, 70, 229, 0.08);
+      }
+
+      .stars {
+        color: #f59e0b;
+        font-size: 17px;
+        margin-bottom: 12px;
+      }
+
+      .review p {
+        color: #374151;
+        line-height: 1.65;
+        margin-bottom: 16px;
+      }
+
+      .review b {
+        color: #6d28d9;
+      }
+
+      .contact-card {
+        background: linear-gradient(135deg, #0891b2, #7c3aed, #db2777);
+        color: #ffffff;
+        border-radius: 30px;
+        padding: 52px 32px;
+        text-align: center;
+        box-shadow: 0 18px 38px rgba(124, 58, 237, 0.22);
+      }
+
+      .contact-card h2 {
+        font-size: 34px;
+        margin-bottom: 10px;
+      }
+
+      .contact-card p {
+        color: #f0f9ff;
+        margin-bottom: 28px;
+      }
+
+      .contact-card form {
+        max-width: 480px;
+        margin: 0 auto;
+      }
+
+      .contact-card input {
+        width: 100%;
+        padding: 14px 16px;
+        margin-bottom: 14px;
+        border: 2px solid transparent;
+        border-radius: 12px;
+        font-size: 15px;
+        background: #ffffff;
+        color: #1e1b4b;
+      }
+
+      .contact-card input:focus {
+        outline: none;
+        border-color: #fde047;
+      }
+
+      .contact-card button {
+        width: 100%;
+        font-size: 16px;
+      }
+
+      footer {
+        background: #1e1b4b;
+        color: #e9d5ff;
+        text-align: center;
+        padding: 28px 16px;
+        line-height: 1.8;
+        margin-top: 20px;
+      }
+
+      @media (max-width: 860px) {
+        header {
+          border-radius: 22px;
+          margin: 10px 14px;
+          flex-wrap: wrap;
+        }
+
+        nav {
+          display: none;
+          width: 100%;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 14px;
+          padding-top: 16px;
+        }
+
+        .menu-btn {
+          display: block;
+        }
+
+        .hero {
+          margin: 14px 14px 0;
+          padding: 36px 24px;
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .hero-content h1 {
+          font-size: 34px;
+        }
+
+        .hero-visual img {
+          height: 270px;
+        }
+
+        .product-box {
+          flex-direction: column;
+          text-align: center;
+          padding: 28px 20px;
+        }
+
+        .product-box img {
+          height: 240px;
+        }
+
+        .price-wrap {
+          justify-content: center;
+        }
+
+        .features,
+        .testimonials {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">PulsePods</div>
+      <div class="menu-btn">☰</div>
+      <nav>
+        <a href="#home">Trang chủ</a>
+        <a href="#features">Tính năng</a>
+        <a href="#product">Sản phẩm</a>
+        <a href="#reviews">Đánh giá</a>
+        <a href="#contact" class="nav-cta">Liên hệ</a>
+      </nav>
+    </header>
+
+    <div class="hero" id="home">
+      <div class="hero-content">
+        <div class="badge">PHIÊN BẢN MỚI 2026</div>
+        <h1>
+          Âm thanh sống động<br />
+          <span>PulsePods Air</span>
+        </h1>
+        <p>
+          Tai nghe không dây chống ồn chủ động, thiết kế rực rỡ cá tính, đồng
+          hành cùng bạn nghe nhạc, học online và giải trí mọi lúc.
+        </p>
+        <a href="#product" class="btn">Khám phá ngay</a>
+      </div>
+      <div class="hero-visual">
+        <img
+          src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800"
+          alt="Tai nghe không dây PulsePods Air"
+        />
+      </div>
+    </div>
+
+    <section id="features">
+      <div class="section-title">
+        <h2>Tính năng nổi bật</h2>
+        <p>Trải nghiệm nghe nhìn mượt mà và tiện lợi mỗi ngày</p>
+      </div>
+      <div class="features">
+        <div class="feature-card">
+          <div class="icon">🎧</div>
+          <h3>Chống ồn thông minh</h3>
+          <p>
+            Giảm tạp âm xung quanh hiệu quả khi ngồi quán cà phê, xe buýt hay
+            phòng học chung.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">⚡</div>
+          <h3>Kết nối siêu nhanh</h3>
+          <p>
+            Ghép nối ổn định với điện thoại và laptop, chuyển đổi mượt mà không
+            độ trễ.
+          </p>
+        </div>
+        <div class="feature-card">
+          <div class="icon">🔋</div>
+          <h3>Pin lên đến 36 giờ</h3>
+          <p>
+            Thoải mái nghe nhạc và gọi thoại suốt nhiều ngày chỉ với một lần sạc
+            đầy hộp.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="product">
+      <div class="product-box">
+        <img
+          src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800"
+          alt="PulsePods Air"
+        />
+        <div class="product-info">
+          <h2>PulsePods Air</h2>
+          <p>
+            Đệm tai mềm mại ôm nhẹ nhàng, chất âm cân bằng rõ nét cả bass lẫn
+            treble, phù hợp cho cả nghe nhạc sôi động lẫn học tập trực tuyến.
+          </p>
+          <div class="price-wrap">
+            <div class="price">890.000đ</div>
+            <div class="old-price">1.290.000đ</div>
+          </div>
+          <div class="promo-tag">
+            🎁 Tặng kèm túi đựng chống sốc &amp; cáp sạc
+          </div>
+          <br />
+          <a href="#contact" class="btn btn-purple">Đặt mua ngay</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="reviews">
+      <div class="section-title">
+        <h2>Khách hàng nói gì?</h2>
+        <p>Cảm nhận thực tế từ người dùng đã trải nghiệm</p>
+      </div>
+      <div class="testimonials">
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "Đeo lâu không bị đau tai, màu sắc nhìn trẻ trung và nổi bật hơn hẳn
+            mấy mẫu đen trắng thường."
+          </p>
+          <b>Nguyễn Hoàng Yến</b>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "Bật chống ồn nghe nhạc lúc đi xe khá ổn, pin dùng mấy ngày mới phải
+            cắm sạc lại."
+          </p>
+          <b>Trần Quốc Huy</b>
+        </div>
+        <div class="review">
+          <div class="stars">★★★★★</div>
+          <p>
+            "Giá tầm này mà chất lượng hoàn thiện chắc chắn, mic đàm thoại rõ
+            ràng khi họp nhóm."
+          </p>
+          <b>Lê Bảo Ngọc</b>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="contact-card">
+        <h2>Đăng ký nhận tư vấn</h2>
+        <p>Để lại thông tin, chúng tôi sẽ liên hệ hỗ trợ nhanh nhất.</p>
+        <form action="#" method="post">
+          <input type="text" id="name" placeholder="Họ và tên" required />
+          <input type="tel" id="phone" placeholder="Số điện thoại" required />
+          <input type="email" id="email" placeholder="Email của bạn" required />
+          <button type="submit" class="btn">Gửi thông tin</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 PulsePods Vietnam. All rights reserved.</p>
+      <p>Hotline: 0988 654 321 | Email: hello@pulsepods.vn</p>
+    </footer>
+  </body>
+</html>
